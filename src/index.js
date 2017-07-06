@@ -6,14 +6,17 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
+import { createLogger } from 'redux-logger';
 
 import rootReducer from './redux/reducers';
-import { getRecipeByNameEpic } from './redux/epics/recipe.epics'; // remember this defaults to the index file in the folder
+import rootEpic from './redux/epics'; // remember this defaults to the index file in the folder
+
+const loggerMiddleware = createLogger()
 
 const store = createStore(
   rootReducer,
   // you should try adding the redux-logger middleware!
-  applyMiddleware(createEpicMiddleware(getRecipeByNameEpic)),
+  applyMiddleware(createEpicMiddleware(rootEpic), loggerMiddleware),
 );
 
 // I make a new component here that wraps the App component in a provider, THIS provider
