@@ -2,7 +2,8 @@ import { RECIPE_ACTIONS } from '../actions/recipe.actions';
 
 const DEFAULT_STATE = {
   list: [],
-  isError: false
+  isError: false,
+  searchTerm: ''
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -20,6 +21,9 @@ export default (state = DEFAULT_STATE, action) => {
       // https://github.com/redux-observable/redux-observable/blob/master/docs/recipes/ErrorHandling.md
     case RECIPE_ACTIONS.RECIPES_RECEIVED_ERROR:
       return {...state, list: [], isError: true };
+
+    case RECIPE_ACTIONS.SET_SEARCH_TERM:
+      return Object.assign({}, state, {searchTerm: action.payload})
 
     default:
       return state;
