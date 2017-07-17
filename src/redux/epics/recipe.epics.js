@@ -32,14 +32,3 @@ export const getRecipeByNameEpic = action$ =>
           payload: response.hits.map(hit => hit.recipe),
         }))
     );
-
-    //attempts to fetch the result of the search, code is not complete though
-
-export const fetchSearchResultEpic = action$ =>
-  action$.ofType(RECIPE_ACTIONS.FETCH_SEARCH_RESULT)
-    .mergeMap(action =>
-          Observable.ajax()
-            .map(response => fetchSearchResultFulfilled(response))
-        );
-
-    dispatch(fetchSearchResultEpic(''));

@@ -14,10 +14,6 @@ const App = props =>
         {props.test}
         <h2>Welcome to <span className="strike">React</span> Redux-Observable!</h2>
       </div>
-      <p className="App-intro">
-        <button onClick={() => props.getRecipeByName('omelet')}>Click me for Omelet</button>
-      </p>
-      {props.recipeList.map(recipe => <h3 key={recipe.uri}>name: {recipe.label} calories: {recipe.calories}</h3>)}
       <label>
         <input
           onChange={(event) => props.setSearchTerm(event.target.value)}
@@ -27,19 +23,24 @@ const App = props =>
           required
         />
       </label>
-      <button onClick={(event) => props.setSearchTerm(props.recipe.searchTerm)}>Search</button>
+      <button onClick={(event) => {props.getRecipeByName(props.searchTerm)}}>Search</button>
+      {props.recipeList.map(recipe => <h3 key={recipe.uri}>name: {recipe.label} calories: {recipe.calories}</h3>)}
     </div>
   );
 
 
 
-const connectConfig = connect(state => ({
-  test: 'foo', // how could I potentially apply the value of the reducer on line 6 of reducers/index.js?
-  recipeList: state.recipe.list,
-}), {
-  getRecipeByName, // how can we simplify this, do we remember?
-  setSearchTerm
-});
+const connectConfig = connect(
+  state => ({
+    test: 'foo', // how could I potentially apply the value of the reducer on line 6 of reducers/index.js?
+    recipeList: state.recipe.list,
+    searchTerm: state.recipe.searchTerm,
+  }),
+  {
+    getRecipeByName, // how can we simplify this, do we remember?
+    setSearchTerm
+  }
+);
 
 
 export default connectConfig(App);
