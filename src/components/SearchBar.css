@@ -1,0 +1,8 @@
+.search-bar input {
+  padding: 2px 2px 2px 2px;
+}
+
+.search-bar button {
+  background-color: blue;
+  padding: 2px 2px 2px 2px;
+}

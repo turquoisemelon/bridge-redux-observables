@@ -1,33 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { getRecipeByName } from './redux/actions/recipe.actions';
-import { setSearchTerm } from './redux/actions/recipe.actions';
+import { getRecipeByName } from './actions/recipe.actions';
+import { setSearchTerm } from './actions/recipe.actions';
+
+import SearchBar from './components/SearchBar';
+import RecipeList from './components/RecipeList';
+import RecipeInfo from './components/RecipeInfo';
 
 
 // remember, props should now have data coming in from redux state!
 // because of this, we don't even need to make our 'top level' components stateful!
-const App = props =>
-  (
-    <div className="App">
-      <div className="App-header">
-        {props.test}
-        <h2>Welcome to <span className="strike">React</span> Redux-Observable!</h2>
-      </div>
-      <label>
-        <input
-          onChange={(event) => props.setSearchTerm(event.target.value)}
-          name="searchTerm"
-          type="text"
-          placeholder="Search"
-          required
-        />
-      </label>
-      <button onClick={(event) => {props.getRecipeByName(props.searchTerm)}}>Search</button>
-      {props.recipeList.map(recipe => <h3 key={recipe.uri}>name: {recipe.label} calories: {recipe.calories}</h3>)}
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    const { setSearchTerm, getRecipeByName, searchTerm, recipeList, test } = this.props;
+    return <div className="App">
+      <div className="App-header">
+        <h2>Welcome to Recipe Box</h2>
+      </div>
+      <div>
+        <SearchBar onSearchTyped={setSearchTerm} onSearchTermSubmit={getRecipeByName} searchInput={searchTerm} />
+      </div>
+      <div className="recipe-container">
+        <RecipeList recipeItems={recipeList}/>
+        <RecipeInfo />
+      </div>
+    </div>
+  }
+}
 
 
 const connectConfig = connect(

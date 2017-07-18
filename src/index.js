@@ -7,8 +7,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
-import rootReducer from './redux/reducers';
-import rootEpic from './redux/epics'; // remember this defaults to the index file in the folder
+import rootReducer from './reducers';
+import rootEpic from './epics'; // remember this defaults to the index file in the folder
 
 const loggerMiddleware = createLogger({});
 
