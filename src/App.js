@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { getRecipeByName } from './redux/actions/recipe.actions';
-import { setSearchTerm } from './redux/actions/recipe.actions';
-
+import { getRecipeByName, setSearchTerm } from './redux/actions/recipe.actions';
 
 // remember, props should now have data coming in from redux state!
 // because of this, we don't even need to make our 'top level' components stateful!

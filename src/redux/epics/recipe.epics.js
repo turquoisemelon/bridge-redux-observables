@@ -39,7 +39,8 @@ export const fetchSearchResultEpic = action$ =>
   action$.ofType(RECIPE_ACTIONS.FETCH_SEARCH_RESULT)
     .mergeMap(action =>
           Observable.ajax()
-            .map(response => fetchSearchResultFulfilled(response))
+            .map(response => ({
+                type: RECIPE_ACTIONS.FETCH_SEARCH_RESULT_FULFILLED,
+                payload: response
+            }))
         );
-
-    dispatch(fetchSearchResultEpic(''));
